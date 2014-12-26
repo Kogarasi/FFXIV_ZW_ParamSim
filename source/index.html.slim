@@ -1,0 +1,44 @@
+
+.container-fluid ng-app="ZWSim"
+  div ng-controller="ZWSimController"
+
+    .well#caption
+      | 新生FF14のゾディアックウェポンのパラメータ振り当て用のシミュレータです
+
+    .col-xs-4
+      .well#novus
+        b ノウス({{novus.sum()}} / 75)
+        br
+
+        form
+          - data.param.each do |value,key|
+            form-group
+              label 
+                = key
+                = "({{novus.#{value}}} / {{novus.max_#{value}}})"
+              input.form-control type="number" ng-model="novus.#{value}" ng-change="novus.refresh()"
+
+    .col-xs-4
+      .well#nexus
+        b ネクサス({{nexus.sum()}} / 78)
+        br
+
+        form
+          - data.param.each do |value,key|
+            form-group
+              label 
+                = key
+                = "({{nexus.#{value}}} / {{nexus.max_#{value}}})"
+              input.form-control type="number" ng-model="nexus.#{value}" readonly="readonly"
+    .col-xs-4
+      .well#zw
+        b ゾディアックウェポン({{zw.sum()}} / 84)
+        br
+
+        form
+          - data.param.each do |value,key|
+            form-group
+              label 
+                = key
+                = "({{zw.#{value}}} / {{zw.max_#{value}}})"
+              input.form-control type="number" ng-model="zw.#{value}" readonly="readonly"

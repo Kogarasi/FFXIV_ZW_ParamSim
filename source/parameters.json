@@ -1,0 +1,32 @@
+{
+	"novus":{
+		"il":110,
+		"acc":44,
+		"parry":44,
+		"pie":33,
+		"deter":31,
+		"cri":44,
+		"skill":44,
+		"spell":44
+	},
+	"nexus":{
+		"il":115,
+		"acc":46,
+		"parry":46,
+		"pie":35,
+		"deter":32,
+		"cri":46,
+		"skill":46,
+		"spell":46
+	},
+	"zw":{
+		"il":125,
+		"acc":49,
+		"parry":49,
+		"pie":37,
+		"deter":35,
+		"cri":49,
+		"skill":49,
+		"spell":49
+	}
+}

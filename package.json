@@ -1,0 +1,25 @@
+{
+  "name": "FFXIV_ZW_ParamSim",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kogarasi/FFXIV_ZW_ParamSim.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/Kogarasi/FFXIV_ZW_ParamSim/issues"
+  },
+  "devDependencies": {
+	  "grunt": "~0.4.5",
+	  "grunt-contrib-watch": "~0.6.1",
+	  "grunt-middleman": "~0.1.2",
+	  "grunt-typescript": "~0.3.8",
+	  "grunt-external-daemon": "~1.1.0"
+  }
+}
