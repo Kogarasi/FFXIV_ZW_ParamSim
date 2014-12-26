@@ -33,7 +33,11 @@ module.exports = (grunt) ->
 			build:
 				options:
 					command: 'build'
+			deploy:
+				options:
+					command: 'deploy'
 
 	grunt.registerTask 'default', [ 'typescript', 'watch' ]
 	grunt.registerTask 'serve', [ 'typescript', 'external_daemon:mid_serve', 'watch' ]
 	grunt.registerTask 'build', ['typescript', 'middleman:build' ]
+	grunt.registerTask 'deploy', ['typescript', 'middleman:deploy' ]
