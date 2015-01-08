@@ -1,0 +1,72 @@
+/* line 1, ../index.scss */
+.bs-callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px; }
+
+/* line 8, ../index.scss */
+.bs-callout h4 {
+  margin-top: 0;
+  margin-bottom: 5px; }
+
+/* line 12, ../index.scss */
+.bs-callout p:last-child {
+  margin-bottom: 0; }
+
+/* line 15, ../index.scss */
+.bs-callout code {
+  border-radius: 3px; }
+
+/* line 18, ../index.scss */
+.bs-callout + .bs-callout {
+  margin-top: -5px; }
+
+/* line 21, ../index.scss */
+.bs-callout-default {
+  border-left-color: #777; }
+
+/* line 24, ../index.scss */
+.bs-callout-default h4 {
+  color: #777; }
+
+/* line 27, ../index.scss */
+.bs-callout-primary {
+  border-left-color: #428bca; }
+
+/* line 30, ../index.scss */
+.bs-callout-primary h4 {
+  color: #428bca; }
+
+/* line 33, ../index.scss */
+.bs-callout-success {
+  border-left-color: #5cb85c; }
+
+/* line 36, ../index.scss */
+.bs-callout-success h4 {
+  color: #5cb85c; }
+
+/* line 39, ../index.scss */
+.bs-callout-danger {
+  border-left-color: #d9534f; }
+
+/* line 42, ../index.scss */
+.bs-callout-danger h4 {
+  color: #d9534f; }
+
+/* line 45, ../index.scss */
+.bs-callout-warning {
+  border-left-color: #f0ad4e; }
+
+/* line 48, ../index.scss */
+.bs-callout-warning h4 {
+  color: #f0ad4e; }
+
+/* line 51, ../index.scss */
+.bs-callout-info {
+  border-left-color: #5bc0de; }
+
+/* line 54, ../index.scss */
+.bs-callout-info h4 {
+  color: #5bc0de; }

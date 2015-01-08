@@ -1,7 +1,10 @@
 var ZWSim;
 (function (ZWSim) {
-    var Weapon = (function () {
-        function Weapon() {
+    var Parameter = (function () {
+        function Parameter() {
+            this.reset();
+        }
+        Parameter.prototype.reset = function () {
             this.acc = 0;
             this.cri = 0;
             this.deter = 0;
@@ -9,52 +12,52 @@ var ZWSim;
             this.pie = 0;
             this.skill = 0;
             this.spell = 0;
-
-            this.link = undefined;
+        };
+        return Parameter;
+    })();
+    ZWSim.Parameter = Parameter;
+})(ZWSim || (ZWSim = {}));
+var ZWSim;
+(function (ZWSim) {
+    var Weapon = (function () {
+        function Weapon() {
+            this.now = new ZWSim.Parameter();
+            this.max = new ZWSim.Parameter();
+            this.nexus = new ZWSim.Parameter();
+            this.zw = new ZWSim.Parameter();
         }
         Weapon.prototype.set = function (json) {
-            this.il = json.il;
-            this.max_acc = json.acc;
-            this.max_cri = json.cri;
-            this.max_deter = json.deter;
-            this.max_parry = json.parry;
-            this.max_pie = json.pie;
-            this.max_skill = json.skill;
-            this.max_spell = json.spell;
+            this.max.acc = json.novus.acc;
+            this.max.cri = json.novus.cri;
+            this.max.deter = json.novus.deter;
+            this.max.parry = json.novus.parry;
+            this.max.pie = json.novus.pie;
+            this.max.skill = json.novus.skill;
+            this.max.spell = json.novus.spell;
+
+            this.now.reset();
+            this.nexus.reset();
+            this.zw.reset();
+
+            this.data = json;
         };
 
-        Weapon.prototype.sum = function () {
-            return this.acc + this.cri + this.deter + this.parry + this.pie + this.skill + this.spell;
-        };
+        Weapon.prototype.compute = function () {
+            this.nexus.acc = Math.floor((this.data.nexus.acc - this.data.novus.acc) * (this.now.acc / this.max.acc));
+            this.nexus.cri = Math.floor((this.data.nexus.cri - this.data.novus.cri) * (this.now.cri / this.max.cri));
+            this.nexus.deter = Math.floor((this.data.nexus.deter - this.data.novus.deter) * (this.now.deter / this.max.deter));
+            this.nexus.parry = Math.floor((this.data.nexus.parry - this.data.novus.parry) * (this.now.parry / this.max.parry));
+            this.nexus.skill = Math.floor((this.data.nexus.skill - this.data.novus.skill) * (this.now.skill / this.max.skill));
+            this.nexus.spell = Math.floor((this.data.nexus.spell - this.data.novus.spell) * (this.now.spell / this.max.spell));
+            this.nexus.pie = Math.floor((this.data.nexus.pie - this.data.novus.pie) * (this.now.pie / this.max.pie));
 
-        Weapon.prototype.link_to = function (link) {
-            this.link = link;
-        };
-
-        Weapon.prototype.refresh = function () {
-            if (this.link != undefined) {
-                this.link.assoc(this);
-                this.link.refresh();
-            }
-        };
-
-        Weapon.prototype.assoc = function (from) {
-            this.acc = Math.floor(from.acc * this.max_acc / from.max_acc);
-            this.cri = Math.floor(from.cri * this.max_cri / from.max_cri);
-            this.deter = Math.floor(from.deter * this.max_deter / from.max_deter);
-            this.parry = Math.floor(from.parry * this.max_parry / from.max_parry);
-            this.pie = Math.floor(from.pie * this.max_pie / from.max_pie);
-            this.skill = Math.floor(from.skill * this.max_skill / from.max_skill);
-            this.spell = Math.floor(from.spell * this.max_spell / from.max_spell);
-
-            var _rate = this.il / from.il;
-            this.acc = Math.floor(from.acc * _rate);
-            this.cri = Math.floor(from.cri * _rate);
-            this.deter = Math.floor(from.deter * _rate);
-            this.parry = Math.floor(from.parry * _rate);
-            this.pie = Math.floor(from.pie * _rate);
-            this.skill = Math.floor(from.skill * _rate);
-            this.spell = Math.floor(from.spell * _rate);
+            this.zw.acc = Math.floor((this.data.zw.acc - this.data.novus.acc) * (this.now.acc / this.max.acc));
+            this.zw.cri = Math.floor((this.data.zw.cri - this.data.novus.cri) * (this.now.cri / this.max.cri));
+            this.zw.deter = Math.floor((this.data.zw.deter - this.data.novus.deter) * (this.now.deter / this.max.deter));
+            this.zw.parry = Math.floor((this.data.zw.parry - this.data.novus.parry) * (this.now.parry / this.max.parry));
+            this.zw.skill = Math.floor((this.data.zw.skill - this.data.novus.skill) * (this.now.skill / this.max.skill));
+            this.zw.spell = Math.floor((this.data.zw.spell - this.data.novus.spell) * (this.now.spell / this.max.spell));
+            this.zw.pie = Math.floor((this.data.zw.pie - this.data.novus.pie) * (this.now.pie / this.max.pie));
         };
         return Weapon;
     })();
@@ -64,20 +67,19 @@ angular.module('ZWSim', []).controller('ZWSimController', [
     '$scope', '$http', function ($scope, $http) {
         var $uri = "parameters.json";
 
-        $scope.novus = new ZWSim.Weapon();
-        $scope.nexus = new ZWSim.Weapon();
-        $scope.zw = new ZWSim.Weapon();
+        $scope.weapon = new ZWSim.Weapon();
+        $scope.weapon_type = "dps";
 
-        $scope.novus.link_to($scope.nexus);
-        $scope.nexus.link_to($scope.zw);
+        $scope.type_changed = function () {
+            $scope.weapon.set($scope.param[$scope.weapon_type]);
+        };
 
         $http({
             method: 'GET',
             url: $uri
         }).success(function (data, status, header, config) {
-            $scope.novus.set(data.novus);
-            $scope.nexus.set(data.nexus);
-            $scope.zw.set(data.zw);
+            $scope.param = data;
+            $scope.type_changed();
         });
     }]);
 //# sourceMappingURL=index.js.map
