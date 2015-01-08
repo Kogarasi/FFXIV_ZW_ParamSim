@@ -1,44 +1,39 @@
+link rel="stylesheet" href="index.css"
 
 .container-fluid ng-app="ZWSim"
   div ng-controller="ZWSimController"
 
-    .well#caption
+    .bs-callout.bs-callout-info#caption
+      h4 説明 ~Description~
       | 新生FF14のゾディアックウェポンのパラメータ振り当て用のシミュレータです
+      br
+      | 種別をDPS/ヒーラー/ナイト剣or盾から選択して、ノウスにパラメータを設定してください。
 
-    .col-xs-4
-      .well#novus
-        b ノウス({{novus.sum()}} / 75)
-        br
 
-        form
-          - data.param.each do |value,key|
-            form-group
-              label 
+    .bs-callout.bs-callout-info
+      h4 種別選択 ~Select for Role/Arms~
+      form
+        .radio
+          - data.types.each do |value,key|
+              label.radio-inline
+                input type="radio" ng-model="weapon_type" ng-change="type_changed()" name="weapon_type" value="#{value}"
                 = key
-                = "({{novus.#{value}}} / {{novus.max_#{value}}})"
-              input.form-control type="number" ng-model="novus.#{value}" ng-change="novus.refresh()"
+        
+    .bs-callout.bs-callout-success
+      h4 計算表 ~Simulate Weapon Parameter~
 
-    .col-xs-4
-      .well#nexus
-        b ネクサス({{nexus.sum()}} / 78)
-        br
+      - data.param.each do |value,key|
+        .panel.panel-default
+          .panel-heading
+            h5.panel-title
+              = key + "- {{weapon.now.#{value}}} / {{weapon.max.#{value}}}"
+          .panel-body
+            input.form-control type="number" ng-model="weapon.now.#{value}" ng-change="weapon.compute()" min=0 max="{{weapon.max.#{value}}}"
+            .progress
+              .progress-bar.progress-bar-striped.progress-bar-info ng-style="{width:weapon.now.#{value} + '%'}"
+                | {{weapon.now.#{value}}}
+              .progress-bar.progress-bar-striped.progress-bar-warning ng-style="{width:weapon.nexus.#{value} + '%'}"
+                | {{weapon.nexus.#{value}}}
+              .progress-bar.progress-bar-striped.progress-bar-danger ng-style="{width:weapon.zw.#{value} + '%'}"
+                | {{weapon.zw.#{value}}}
 
-        form
-          - data.param.each do |value,key|
-            form-group
-              label 
-                = key
-                = "({{nexus.#{value}}} / {{nexus.max_#{value}}})"
-              input.form-control type="number" ng-model="nexus.#{value}" readonly="readonly"
-    .col-xs-4
-      .well#zw
-        b ゾディアックウェポン({{zw.sum()}} / 84)
-        br
-
-        form
-          - data.param.each do |value,key|
-            form-group
-              label 
-                = key
-                = "({{zw.#{value}}} / {{zw.max_#{value}}})"
-              input.form-control type="number" ng-model="zw.#{value}" readonly="readonly"

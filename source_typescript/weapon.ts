@@ -1,79 +1,54 @@
+/// <reference path="parameter.ts" />
+
 module ZWSim {
 	export class Weapon {
-		il: number;
-		acc: number;
-		cri: number;
-		deter: number;
-		parry: number;
-		pie: number;
-		skill: number;
-		spell: number;
+		now: Parameter;
+		max: Parameter;
+		nexus: Parameter;
+		zw: Parameter;
 
-		max_acc: number;
-		max_cri: number;
-		max_deter: number;
-		max_parry: number;
-		max_pie: number;
-		max_skill: number;
-		max_spell: number;
-
-		link: Weapon;
+		data: any;
 
 		constructor(){
-			this.acc = 0;
-			this.cri = 0;
-			this.deter = 0;
-			this.parry = 0;
-			this.pie = 0;
-			this.skill = 0;
-			this.spell = 0;
-
-			this.link = undefined;
+			this.now = new Parameter();
+			this.max = new Parameter();
+			this.nexus = new Parameter();
+			this.zw = new Parameter();
 		}
 
 		set( json ){
-			this.il = json.il;
-			this.max_acc = json.acc;
-			this.max_cri = json.cri;
-			this.max_deter = json.deter;
-			this.max_parry = json.parry;
-			this.max_pie = json.pie;
-			this.max_skill = json.skill;
-			this.max_spell = json.spell;
+			this.max.acc = json.novus.acc;
+			this.max.cri = json.novus.cri;
+			this.max.deter = json.novus.deter;
+			this.max.parry = json.novus.parry;
+			this.max.pie = json.novus.pie;
+			this.max.skill = json.novus.skill;
+			this.max.spell = json.novus.spell;
+
+			this.now.reset();
+			this.nexus.reset();
+			this.zw.reset();
+
+			this.data = json;
 		}
 
-		sum(){
-			return this.acc + this.cri + this.deter + this.parry + this.pie + this.skill + this.spell;
-		}
+		compute(){
 
-		link_to( link: Weapon ){
-			this.link = link;
-		}
+			this.nexus.acc = Math.floor( (this.data.nexus.acc-this.data.novus.acc) * (this.now.acc/this.max.acc) );
+			this.nexus.cri = Math.floor( (this.data.nexus.cri-this.data.novus.cri) * (this.now.cri/this.max.cri) );
+			this.nexus.deter = Math.floor( (this.data.nexus.deter-this.data.novus.deter) * (this.now.deter/this.max.deter) );
+			this.nexus.parry = Math.floor( (this.data.nexus.parry-this.data.novus.parry) * (this.now.parry/this.max.parry) );
+			this.nexus.skill = Math.floor( (this.data.nexus.skill-this.data.novus.skill) * (this.now.skill/this.max.skill) );
+			this.nexus.spell = Math.floor( (this.data.nexus.spell-this.data.novus.spell) * (this.now.spell/this.max.spell) );
+			this.nexus.pie = Math.floor( (this.data.nexus.pie-this.data.novus.pie) * (this.now.pie/this.max.pie) );
 
-		refresh(){
-			if( this.link != undefined ){
-				this.link.assoc( this );
-				this.link.refresh();
-			}
-		}
-
-		assoc( from:Weapon ){
-			this.acc = Math.floor( from.acc * this.max_acc / from.max_acc );
-			this.cri = Math.floor( from.cri * this.max_cri / from.max_cri );
-			this.deter = Math.floor( from.deter * this.max_deter / from.max_deter );
-			this.parry = Math.floor( from.parry * this.max_parry / from.max_parry );
-			this.pie = Math.floor( from.pie * this.max_pie / from.max_pie );
-			this.skill = Math.floor( from.skill * this.max_skill / from.max_skill );
-			this.spell = Math.floor( from.spell * this.max_spell / from.max_spell );
-
-			var _rate: number = this.il / from.il;
-			this.acc = Math.floor( from.acc * _rate );
-			this.cri = Math.floor( from.cri * _rate );
-			this.deter = Math.floor( from.deter * _rate );
-			this.parry = Math.floor( from.parry * _rate );
-			this.pie = Math.floor( from.pie * _rate );
-			this.skill = Math.floor( from.skill * _rate );
-			this.spell = Math.floor( from.spell * _rate );
+			this.zw.acc = Math.floor( (this.data.zw.acc-this.data.novus.acc) * (this.now.acc/this.max.acc) );
+			this.zw.cri = Math.floor( (this.data.zw.cri-this.data.novus.cri) * (this.now.cri/this.max.cri) );
+			this.zw.deter = Math.floor( (this.data.zw.deter-this.data.novus.deter) * (this.now.deter/this.max.deter) );
+			this.zw.parry = Math.floor( (this.data.zw.parry-this.data.novus.parry) * (this.now.parry/this.max.parry) );
+			this.zw.skill = Math.floor( (this.data.zw.skill-this.data.novus.skill) * (this.now.skill/this.max.skill) );
+			this.zw.spell = Math.floor( (this.data.zw.spell-this.data.novus.spell) * (this.now.spell/this.max.spell) );
+			this.zw.pie = Math.floor( (this.data.zw.pie-this.data.novus.pie) * (this.now.pie/this.max.pie) );
 		}
 	}
 }

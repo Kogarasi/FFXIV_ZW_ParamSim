@@ -6,20 +6,20 @@ angular.module( 'ZWSim', [] )
 	.controller( 'ZWSimController', [ '$scope', '$http', ( $scope, $http )=>{
 		var $uri = "parameters.json";
 
-		$scope.novus = new ZWSim.Weapon();
-		$scope.nexus = new ZWSim.Weapon();
-		$scope.zw = new ZWSim.Weapon();
+		$scope.weapon = new ZWSim.Weapon();
+		$scope.weapon_type = "dps";
 
-		$scope.novus.link_to( $scope.nexus );
-		$scope.nexus.link_to( $scope.zw );
+		$scope.type_changed = function(){
+			$scope.weapon.set( $scope.param[ $scope.weapon_type ] );
+		};
 
 		$http({
 			method: 'GET',
 			url: $uri
 		}).success( function( data, status, header, config ){
-			$scope.novus.set( data.novus );
-			$scope.nexus.set( data.nexus );
-			$scope.zw.set( data.zw );
+
+			$scope.param = data;
+			$scope.type_changed();
 		});
 
 	}]);
