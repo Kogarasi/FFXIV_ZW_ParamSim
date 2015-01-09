@@ -39,8 +39,8 @@ link rel="stylesheet" href="index.css"
             .progress
               .progress-bar.progress-bar-striped.progress-bar-info ng-style="{width:weapon.now.#{value} + '%'}"
                 | {{weapon.now.#{value}}}
-              .progress-bar.progress-bar-striped.progress-bar-warning ng-style="{width:weapon.nexus.#{value} + '%'}"
+              .progress-bar.progress-bar-striped.progress-bar-warning ng-style="{width:(weapon.nexus.#{value}*5)  + '%'}"
                 | {{weapon.nexus.#{value}}}
-              .progress-bar.progress-bar-striped.progress-bar-danger ng-style="{width:weapon.zw.#{value} + '%'}"
+              .progress-bar.progress-bar-striped.progress-bar-danger ng-style="{width:(weapon.zw.#{value}*3) + '%'}"
                 | {{weapon.zw.#{value}}}
 
