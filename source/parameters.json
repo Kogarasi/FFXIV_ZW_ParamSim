@@ -58,7 +58,61 @@
 		}
 	},
 	"knight_sword":{
+		"novus":{
+			"acc":31,
+			"parry":31,
+			"pie":17,
+			"deter":22,
+			"cri":31,
+			"skill":31,
+			"spell":31
+		},
+		"nexus":{
+			"acc":32,
+			"parry":32,
+			"pie":18,
+			"deter":23,
+			"cri":32,
+			"skill":32,
+			"spell":32
+		},
+		"zw":{
+			"acc":35,
+			"parry":35,
+			"pie":19,
+			"deter":25,
+			"cri":35,
+			"skill":35,
+			"spell":35
+		}
 	},
 	"knight_shield":{
+		"novus":{
+			"acc":13,
+			"parry":13,
+			"pie":7,
+			"deter":9,
+			"cri":13,
+			"skill":13,
+			"spell":13
+		},
+		"nexus":{
+			"acc":14,
+			"parry":14,
+			"pie":7,
+			"deter":9,
+			"cri":14,
+			"skill":14,
+			"spell":14
+		},
+		"zw":{
+			"acc":14,
+			"parry":14,
+			"pie":7,
+			"deter":10,
+			"cri":14,
+			"skill":14,
+			"spell":14
+		}
 	}
 }
