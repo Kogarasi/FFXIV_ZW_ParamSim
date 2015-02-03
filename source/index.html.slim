@@ -2,6 +2,8 @@ link rel="stylesheet" href="index.css"
 
 .container-fluid ng-app="ZWSim"
   div ng-controller="ZWSimController"
+    .alert.alert-info
+      | 2/4 : 2.51で追加されるZWのステータスをIL135として追加しました。
 
     .bs-callout.bs-callout-info#caption
       h4 説明 ~Description~
@@ -10,10 +12,6 @@ link rel="stylesheet" href="index.css"
       | 種別をDPS/ヒーラー/ナイト剣or盾から選択して、ノウスのパラメータを割り振ってください
       br
       | そこから、ネクサス及びゾディアックウェポンのボーナス値を表示します
-      br
-      br
-      font color="red" 更新：ナイトのデータをとりあえずですが追加しました
-
 
     .bs-callout.bs-callout-info
       h4 種別選択 ~Select for Role/Arms~
@@ -33,7 +31,17 @@ link rel="stylesheet" href="index.css"
         .panel.panel-default
           .panel-heading
             h5.panel-title
-              = key + "- {{weapon.now.#{value}}} / {{weapon.max.#{value}}}"
+              div
+                = key
+                |  
+                .label.label-info
+                  | Novus: {{weapon.now.#{value}}} / {{weapon.max.#{value}}}
+                .label.label-warning
+                  | Nexus: {{weapon.now.#{value} + weapon.nexus.#{value}}}
+                .label.label-danger
+                  | Zodiac Weapon: {{weapon.now.#{value} + weapon.nexus.#{value} + weapon.zw.#{value}}}
+                .label.label-success
+                  |New ZW(135?) : {{weapon.now.#{value} + weapon.nexus.#{value} + weapon.zw.#{value} + weapon.zw_new.#{value}}}
           .panel-body
             input.form-control type="number" ng-model="weapon.now.#{value}" ng-change="weapon.compute()" min=0 max="{{weapon.max.#{value}}}"
             .progress
@@ -43,4 +51,6 @@ link rel="stylesheet" href="index.css"
                 | {{weapon.nexus.#{value}}}
               .progress-bar.progress-bar-striped.progress-bar-danger ng-style="{width:(weapon.zw.#{value}*3) + '%'}"
                 | {{weapon.zw.#{value}}}
+              .progress-bar.progress-bar-striped.progress-bar-success ng-style="{width:(weapon.zw_new.#{value}*2) + '%'}"
+                | {{weapon.zw_new.#{value}}}
 

@@ -26,6 +26,15 @@
 			"cri":49,
 			"skill":49,
 			"spell":49
+		},
+		"zw_new":{
+			"acc":53,
+			"parry":53,
+			"pie":28,
+			"deter":38,
+			"cri":53,
+			"skill":53,
+			"spell":53
 		}
 	},
 	"healer":{
@@ -55,6 +64,15 @@
 			"cri":49,
 			"skill":49,
 			"spell":49
+		},
+		"zw_new":{
+			"acc":53,
+			"parry":53,
+			"pie":40,
+			"deter":38,
+			"cri":53,
+			"skill":53,
+			"spell":53
 		}
 	},
 	"knight_sword":{
@@ -84,6 +102,15 @@
 			"cri":35,
 			"skill":35,
 			"spell":35
+		},
+		"zw_new":{
+			"acc":38,
+			"parry":38,
+			"pie":28,
+			"deter":27,
+			"cri":38,
+			"skill":38,
+			"spell":38
 		}
 	},
 	"knight_shield":{
@@ -113,6 +140,15 @@
 			"cri":14,
 			"skill":14,
 			"spell":14
+		},
+		"zw_new":{
+			"acc":15,
+			"parry":15,
+			"pie":7,
+			"deter":11,
+			"cri":15,
+			"skill":15,
+			"spell":15
 		}
 	}
 }
